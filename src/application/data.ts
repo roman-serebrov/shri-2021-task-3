@@ -1,21 +1,23 @@
 import produce, { Draft } from 'immer';
 
 import { Action } from './actions';
-import { descriptors, DRAFT_STATE, errors, INTERVAL, State } from './types';
+import { INTERVAL, State} from './types';
 
-export function die(error: keyof typeof errors, ...args: any[]): never {
-    const e = errors[error];
-    const msg = !e
-        ? 'unknown error nr: ' + error
-        : typeof e === 'function'
-            // @ts-ignore
-            ? e.apply(null, args as any) : e;
-    throw new Error(`[function] ${msg}`);
-}
+// descriptors, DRAFT_STATE, errors, не используется
 
-function assertUnrevoked(state: any) {
-    if (state.revoked_) die(1, JSON.stringify(state));
-}
+// export function die(error: keyof typeof errors, ...args: any[]): never {
+//     const e = errors[error];
+//     const msg = !e
+//         ? 'unknown error nr: ' + error
+//         : typeof e === 'function'
+//             // @ts-ignore
+//             ? e.apply(null, args as any) : e;
+//     throw new Error(`[function] ${msg}`);
+// }
+
+// function assertUnrevoked(state: any) {
+//     if (state.revoked_) die(1, JSON.stringify(state));
+// }
 
 export const data = produce((draft: Draft<State>, action: Action) => {
     switch (action.type) {
@@ -61,30 +63,33 @@ export const data = produce((draft: Draft<State>, action: Action) => {
     }
 });
 
-export function proxyProperty(
-    prop: string | number,
-    enumerable: boolean
-): PropertyDescriptor {
-    let desc = descriptors[prop];
-    if (desc) {
-        desc.enumerable = enumerable;
-    } else {
-        descriptors[prop] = desc = {
-            configurable: true,
-            enumerable,
-            get(this: any) {
-                const state = this[DRAFT_STATE];
-                assertUnrevoked(state);
-                // @ts-ignore
-                return objectTraps.get(state, prop);
-            },
-            set(this: any, value) {
-                const state = this[DRAFT_STATE];
-                assertUnrevoked(state);
-                // @ts-ignore
-                objectTraps.set(state, prop, value);
-            },
-        };
-    }
-    return desc;
-}
+
+
+// не  используемый код
+// export function proxyProperty(
+//     prop: string | number,
+//     enumerable: boolean
+// ): PropertyDescriptor {
+//     let desc = descriptors[prop];
+//     if (desc) {
+//         desc.enumerable = enumerable;
+//     } else {
+//         descriptors[prop] = desc = {
+//             configurable: true,
+//             enumerable,
+//             get(this: any) {
+//                 const state = this[DRAFT_STATE];
+//                 assertUnrevoked(state);
+//                 // @ts-ignore
+//                 return objectTraps.get(state, prop);
+//             },
+//             set(this: any, value) {
+//                 const state = this[DRAFT_STATE];
+//                 assertUnrevoked(state);
+//                 // @ts-ignore
+//                 objectTraps.set(state, prop, value);
+//             },
+//         };
+//     }
+//     return desc;
+// }

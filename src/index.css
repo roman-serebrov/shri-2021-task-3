@@ -38,7 +38,7 @@ body {
 }
 
 .slide-progress-value {
-    height: 4;
+    height: 4px;
     background-color: #F4B000;
     transition: transform 0.1s linear;
     transform-origin: left top;
@@ -68,12 +68,12 @@ body {
 .prev {
     transform: rotate(180deg);
 }
-
-@media (max-height: 750px) { 
-    .prev {
-        display: none;
-    }
-}
+/* покажет кнопку назад*/
+/*@media (max-height: 750px) { */
+/*    .prev {*/
+/*        display: none;*/
+/*    }*/
+/*}*/
 
 .theme_light .button {
     color: #BFBFBF;
@@ -90,6 +90,10 @@ body {
 .theme_light .set-light {
     display: none;
 }
+.theme_light .set-dark {
+    display: block;
+}
+
 
 .theme_dark .button {
     color: #918F8A;
@@ -105,4 +109,7 @@ body {
 
 .theme_dark .set-dark {
     display: none;
+}
+.theme_dark .set-light {
+    display: block;
 }

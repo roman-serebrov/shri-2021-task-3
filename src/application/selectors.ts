@@ -1,4 +1,4 @@
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, mergeMapTo } from 'rxjs/operators';
 import { DELAY, Slide, State } from './types';
 
@@ -15,7 +15,7 @@ export const createProgressSelector = (state$: Observable<State>) => state$.pipe
 export const createCurrentIndexSelector = (state$: Observable<State>) => state$.pipe(
     map(s => s.index),
     distinctUntilChanged(),
-    mergeMapTo(EMPTY),
+    // mergeMapTo(EMPTY), при клики мы соеденяем
 );
 
 export const createThemeSelector = (state$: Observable<State>) => state$.pipe(
