@@ -106,7 +106,7 @@ body {
 .theme_dark .slide-progress {
     background: #918F8A;
 }
-
+/* перерисовка темы */
 .theme_dark .set-dark {
     display: none;
 }

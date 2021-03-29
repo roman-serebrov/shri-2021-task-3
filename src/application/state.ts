@@ -6,7 +6,7 @@ import { data } from './data';
 import { Slide, State } from './types';
 
 const DEFAULT_STATE: State = {
-    theme: 'dark',
+    theme: 'dark', // задаем изначальный стиль темы меняем на dark
     index: 0,
     progress: 0,
     pause: false,
